@@ -3,7 +3,7 @@ window.addEventListener("load",() => {
     console.log('hello 2')
     fetch("/api/emailverification", {
         method: "POST",
-        //body: JSON.stringify(token),
+        body: JSON.stringify(token),
         headers: {
             "Content-Type":"application/json"
         }

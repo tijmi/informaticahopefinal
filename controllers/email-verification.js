@@ -3,9 +3,10 @@ const db = require("../routes/db-config");
 const router = express.Router();
 
 
-const emailverification = async (req,res,next) => {
-    console.log("jello",req.token)
-    db.query('SELECT * FROM users WHERE token = ?',[token], async(err, result) =>{
+const emailverification = async (token,req,res,next) => {
+    var tokens = token
+    console.log("hello",tokens)
+    db.query('SELECT * FROM users WHERE token = ?',[tokens], async(err, result) =>{
         if (err) throw err;
         console.log(result)
         if(result[0].verify == 0){
@@ -18,14 +19,17 @@ const emailverification = async (req,res,next) => {
                     if(err) throw err
                
                 })
-                return res.json({ status: 'success', success: "account created succesfully" })
+                res.errors = { status: 'success', success: "account created succesfully" }
+                return next()
               
             } else {
-                return res.json({ status: 'error', error: "email already verified" })
+                res.errors = { status: 'error', error: "email already verified" }
+                return next()
             }
          }else{
             console.log(result)
-            return res.json({ status: 'error', error: "email already verified" })
+            res.errors={ status: 'error', error: "email already verified" }
+            return next()
          }
     })
 }

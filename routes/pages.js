@@ -40,9 +40,10 @@ router.get("/profile", loggedIn,(req,res) => {
 })
 
 router.get("/verify-email", (req,res) => {
-    var token = req.query.token
-    console.log(token)
-    res.sendFile(path.join(__dirname, '../public', 'emailverification.html'),token)
+    var tokens = req.query.token
+    console.log(tokens)
+    emailverification(tokens)
+    res.render("emailverification")
 })
 
 
