@@ -19,8 +19,8 @@ const sendEmail = (email, token) => {
     var mailOptions = {
         from: 'informaticasitethijmen@gmail.com',
         to: email,
-        subject: 'Email verification - Tutsmake.com',
-        html: '<p>You requested for email verification, kindly use this <a href="http://localhost:5000/verify-email?token=' + token + '">link</a> to verify your email address</p>'
+        subject: 'Email verification',
+        html: '<p> use this <a href="http://localhost:5000/verify-email?token=' + token + '">link</a> to verify your email address</p>'
   
     };
   
@@ -65,7 +65,6 @@ const register = async (req, res) => {
                                 }
                                 db.query('UPDATE users SET ? WHERE email ="' + email + '"', data, function(err, result) {
                                     if(err) throw err
-                        
                                 })
                                 return res.json({ status:"alertmsg", alertmsg:"please check email for verification" })
                             } else {

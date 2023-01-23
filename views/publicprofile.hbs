@@ -19,9 +19,8 @@
         </div>
       </div>
     </nav>
-    {{#if user}}
     <div class="container my-5">  
-        {{#with user}}
+        {{#if user}}
             <div class="card" style="width: 100%;">
                 <div class="card-body">
                     <h5 class="cardtitle">username</h5>
@@ -29,14 +28,7 @@
                 </div>
             </div>
             <p></p>
-            <div class="card" style="width: 100%;">
-                <div class="card-body">
-                    <h5 class="cardtitle">email address</h5>
-                    <p class="card-text">{{email}}</p>
-                </div>
-            </div>
-        {{/with}}
-      {{/if}}
+        {{/if}}
         <p></p>
     </div>
 </body>

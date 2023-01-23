@@ -18,7 +18,9 @@ const login = async (req,res) => {
                     httpOnly: true
                 } 
                 res.cookie("userRegisterd", token, cookieOptions);
-                return res.json({status:"success", success:"User logged in succesfully"});
+                if(result[0].verify == "0")return res.json({status: "error", error: "please verify your email"})
+                else return res.json({status:"success", success:"User logged in succesfully"});
+                
             }
         })
     }
