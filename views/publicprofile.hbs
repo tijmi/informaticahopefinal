@@ -30,6 +30,24 @@
             <p></p>
         {{/if}}
         <p></p>
-    </div>
+        {{#if user}}
+          {{#each messages as |item|}}
+            {{#ifCond username item.[0]}} 
+              <div class="card" style="width: 100%;">
+              <div class="card-body">
+                <h5 class="cardtitle">{{@key}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted"><a href="/users?user={{item.[0]}}">{{item.[0]}}</a></h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{item.[2]}}</h6>
+                <p class="card-text">{{item.[1]}}</p>
+              </div>
+              </div>
+            <p></p>
+            {{else}}
+              <p>{{item.[0]}}</p>
+            {{/ifCond}}
+        {{/each}}
+      {{/if}}
 </body>
+    </div>
+    
 </html>

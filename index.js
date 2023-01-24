@@ -10,6 +10,12 @@ app.use("/js", express.static(__dirname+ "/public/js"));
 app.use("/css", express.static(__dirname+ "/public/css"));
 app.set("view engine", "hbs");
 hbs.registerPartials(path.join(__dirname, 'views/layouts'));
+hbs.registerHelper('ifCond', function(v1, v2, options) {
+    if(v1 === v2) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
 app.set("views", "./views")
 app.use(cookie());
 app.use(express.json())

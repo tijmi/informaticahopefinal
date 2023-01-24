@@ -51,9 +51,9 @@ router.get("/verify-email", (req,res) => {
 router.get('/users',loggedIn,messages,(req, res) => {
     var user = res.user
     var username = req.query.user
-    var message = req.message   
+    var message = res.message  
     if (user != undefined){
-        res.render("publicprofile", {user:user, username:username})
+        res.render("publicprofile", {user:user, username:username, messages:message, usernamestr:String(username)})
     } else{
         res.redirect("/")
     }
