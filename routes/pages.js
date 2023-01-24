@@ -43,9 +43,12 @@ router.get("/profile", loggedIn,(req,res) => {
 router.get("/verify-email", (req,res) => {
     var tokens = req.query.token
     console.log(tokens)
-    var message = emailverification(tokens)
-    console.log(message, "hello")
-    res.render("emailverification")
+    var verified = emailverification(tokens)
+    if (verified) {
+        return res.sendFile('verifySuccess.html');
+    } else {
+        return res.sendFile('verifyFail.html');
+    }
 })
 
 router.get('/users',loggedIn,messages,(req, res) => {

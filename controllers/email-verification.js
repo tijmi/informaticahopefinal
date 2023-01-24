@@ -32,21 +32,19 @@ const emailverification = async (token,req,res,next) => {
                     console.log("3")
                     if(err) throw err 
                 })
-                var message = { status: 'success', success: "account created succesfully" }
-                console.log(message)
                 console.log("4")
-                return message
+                return true
               
             } else {
                 var message = { status: 'error', error: "email already verified" }
                 console.log("5")
-                return message
+                return false
             }
          }else{
             console.log(result)
             console.log("6")
             message={ status: 'error', error: "email already verified" }
-            return message
+            return false
          }
     })
 }
