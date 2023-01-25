@@ -36,14 +36,11 @@ const emailverification = async (token,req,res,next) => {
                 return true
               
             } else {
-                var message = { status: 'error', error: "email already verified" }
                 console.log("5")
                 return false
             }
          }else{
-            console.log(result)
             console.log("6")
-            message={ status: 'error', error: "email already verified" }
             return false
          }
     })

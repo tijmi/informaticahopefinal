@@ -31,10 +31,11 @@ router.get("/create-message", (req, res) => {
     res.sendFile("new-message.html", {root: "./public"});
 })
 
-router.get("/profile", loggedIn,(req,res) => {
+router.get("/profile", loggedIn,messages,(req,res) => {
     var user = res.user;
+    var message = res.message;
     if (user != undefined){
-        res.render("profile",{user: user})
+        res.render("profile",{user: user, messages:message})
     } else{
         res.render("index", {user:null})
     }
@@ -43,11 +44,12 @@ router.get("/profile", loggedIn,(req,res) => {
 router.get("/verify-email", (req,res) => {
     var tokens = req.query.token
     console.log(tokens)
-    var verified = emailverification(tokens)
+    let verified = emailverification(tokens)
+    console.log(verified)
     if (verified) {
-        return res.sendFile('verifySuccess.html');
+        res.sendFile('verifySuccess.html',{root: "./public"});
     } else {
-        return res.sendFile('verifyFail.html');
+        res.sendFile('verifyFail.html',{root: "./public"});
     }
 })
 
