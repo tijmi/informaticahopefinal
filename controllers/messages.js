@@ -12,15 +12,11 @@ const messages = (loggedIn,(req, res, next,) => {
             }
             results.forEach(element => {
                 const id = element['user_id']
-                console.log(id)
                 db.query('SELECT * FROM users WHERE id = ?', [id], (err, result) =>{
                     if(err)throw err;
                     const username = result[0];
-                    console.log(username)
-                    message[element['title']] = [username["username"],element['message'],element['date'],element['']];
+                    message[element['title']] = [username["username"],element['message'],element['date'],element['id'],element['']];
                 })
-                 
-                console.log(message)
             });
         res.message = message;
         return next();

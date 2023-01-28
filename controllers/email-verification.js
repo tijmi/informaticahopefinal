@@ -3,19 +3,15 @@ const db = require("../routes/db-config");
 const router = express.Router();
 
 
-const emailverification = async (token,req,res,next) => {
+const emailverification = async(token,req,res,next) => {
     var tokens = token
     console.log("hello",tokens)
-    const email3 = "thdegroote18@gmail.com";
-    db.query('UPDATE users SET verify = 0 WHERE email = ?', email3, (err, result) => {
-        if(err) throw err 
-    })
     db.query('SELECT * FROM users WHERE token = ?',[tokens], async(err, result) =>{
         console.log("1")
         if (err) throw err;
         console.log(result)
         
-        if(result[0].verify == 0){
+        if(result[0].verify == "0"){
             console.log("2")
             console.log(result[0].email)
             if (result.length > 0) {
@@ -31,17 +27,16 @@ const emailverification = async (token,req,res,next) => {
                     console.log(result[0])
                     console.log("3")
                     if(err) throw err 
+                    return 1
                 })
-                console.log("4")
-                return true
               
             } else {
                 console.log("5")
-                return false
+                return 0;
             }
          }else{
             console.log("6")
-            return false
+            return 0;
          }
     })
 }

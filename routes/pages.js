@@ -7,7 +7,9 @@ const db = require("../routes/db-config")
 const jwt = require("jsonwebtoken");
 const emailverification = require("../controllers/email-verification");
 const path = require("path")
-const router = express.Router();
+
+const asyncify = require('express-asyncify')
+const router = asyncify(express.Router());
 
 
 router.get("/", loggedIn, messages, (req, res) => {
@@ -41,12 +43,12 @@ router.get("/profile", loggedIn,messages,(req,res) => {
     }
 })
 
-router.get("/verify-email", (req,res) => {
+router.get("/verify-email", async (req,res) => {
     var tokens = req.query.token
     console.log(tokens)
-    let verified = emailverification(tokens)
-    console.log(verified)
-    if (verified) {
+    const verified = await emailverification(tokens)
+    console.log("hello",verified)
+    if (verified == 1) {
         res.sendFile('verifySuccess.html',{root: "./public"});
     } else {
         res.sendFile('verifyFail.html',{root: "./public"});

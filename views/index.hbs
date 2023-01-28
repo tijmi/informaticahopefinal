@@ -50,7 +50,7 @@
               <h6 class="card-subtitle mb-2 text-muted"><a href="/users?user={{item.[0]}}">{{item.[0]}}</a></h6>
               <h6 class="card-subtitle mb-2 text-muted">{{item.[2]}}</h6>
               <p class="card-text">{{item.[1]}}</p>
-              <button class="like-button" data-item-id="{{id}}">Like</button>
+              <button id="myButton" class="myButton" data-id="{{@index}}">Like</button>
               <span class="like-count">{{like_count}}</span>
             </div>
           </div>
@@ -58,6 +58,6 @@
           {{/each}}
         {{/if}}
       </div>
-      <script>"js/like.js"</script>
+      <script src="js/like.js"></script>
 </body>
 </html>

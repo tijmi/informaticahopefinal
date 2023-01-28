@@ -26,8 +26,10 @@ const sendEmail = (email, token) => {
   
     mail.sendMail(mailOptions, function(error, info) {
         if (error) {
+            console.log('not send')
             return 1
         } else {
+            console.log('send')
             return 0
         }
     });

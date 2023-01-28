@@ -1,7 +1,9 @@
-const likeButtons = document.querySelectorAll('.like-button');
-    likeButtons.forEach(button => {
-        button.addEventListener('click', async event => {
-            const itemId = event.target.dataset.itemId;
-            const likeCountSpan = event.target.nextSibling;
-        })
-    })
+var id = document.getElementsByClassName('myButton')
+console.log("haga")
+console.log(id)
+//const buttons = document.getElementsByClassName('myButton');
+// buttons.addEventListener('click', function(e) {
+//     console.log('button was clicked');
+//     const number = document.querySelector("p");
+//     console.log(number);
+// });
