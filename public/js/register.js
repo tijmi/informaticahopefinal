@@ -31,3 +31,12 @@ form.addEventListener("submit", () => {
             }
         })
 })
+
+function check() {
+    var checkBox = document.getElementById("accept");
+    if (checkBox.checked == true){
+        document.getElementById("submit").disabled = false;
+    } else {
+        document.getElementById("submit").disabled = true;
+    }
+  }

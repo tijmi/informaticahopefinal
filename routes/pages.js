@@ -75,8 +75,13 @@ router.get('/editprofile', async(req,res) => {
 
 router.get('/download', function(req, res){
     const file = `${__dirname}/download/definattlythedesktokversion.mp4`;
-    res.download(file); // Set disposition and send it.
-  });
+    res.download(file);
+});
+
+router.get('/termsofservice', function(req, res){
+    const file = `${__dirname}/download/terms of sevices.pdf`;
+    res.download(file);
+});
   
 
 

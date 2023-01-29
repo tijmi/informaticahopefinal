@@ -51,10 +51,13 @@
               <label for="password" class="form-label">repeat password</label>
               <input type="password" class="form-control" id="passwordrepeat" autocomplete="off" required>
             </div>
+            <input type="checkbox" id="accept" name="accept" value="yes" onclick="check()">  
+            <label for="accept"> I accept with the <a href="/termsofservice">terms of service </a> </label>
+            <br><br>
             <div class="alert alert-danger" role="alert" id="error" style="display: none;"></div>
             <div class="alert alert-success" role="alert" id="success" style="display: none;"></div>
             <div class="alert alert-primary" role="alert" id="alertmsg" style="display: none;"></div>
-            <button type="submit" class="btn btn-primary">register</button>
+            <button type="submit" class="btn btn-primary" id="submit" disabled="true">register</button>
           </form>
         </div>
       </div>
