@@ -1,7 +1,8 @@
 form.addEventListener("submit", () => {
     const newmessage = {
         title: title.value,
-        message: message.value
+        message: message.value,
+        image: image.value
     }
     fetch("/api/new-message", {
         method: "POST",

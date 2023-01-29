@@ -39,16 +39,22 @@
       {{/if}}
       {{#if user}} 
           {{#each messages as |item|}}
-            {{#ifCond item.[0] ../username }} 
+            {{#ifCond item.[0] username }} 
               <div class="card" style="width: 100%;">
-              <div class="card-body">
-                <h5 class="cardtitle">{{@key}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted"><a href="/users?user={{item.[0]}}">{{item.[0]}}</a></h6>
-                <h6 class="card-subtitle mb-2 text-muted">{{item.[2]}}</h6>
-                <p class="card-text">{{item.[1]}}</p>
-              </div>
-              </div>
-            <p></p>
+                  <div class="card-body">
+                    <h5 class="cardtitle">{{item.[3]}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><a href="/users?user={{item.[0]}}">{{item.[0]}}</a></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{item.[2]}}</h6>
+                    <p class="card-text">{{item.[1]}}</p>
+                    {{#if item.[7]}}
+                      <button id="myButton" class="myButton" data-id="{{@index}}" onclick='unlike({{item.[5]}},{{item.[6]}})'>unLike</button>
+                    {{else}}
+                      <button id="myButton" class="myButton" data-id="{{@index}}" onclick='like({{item.[5]}},{{item.[6]}})'>like</button>
+                    {{/if}}
+                    <span class="like-count">{{item.[4]}}</span>
+                  </div>
+                </div>
+                <p></p>
             {{else}}
             <p>{{username}}</p>
             {{/ifCond}}

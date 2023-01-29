@@ -11,12 +11,15 @@ const path = require("path")
 const asyncify = require('express-asyncify')
 const router = asyncify(express.Router());
 
+const like = () =>{
+    console.log(test)
+}
 
-router.get("/", loggedIn, messages, (req, res) => {
-    var user = res.user;
-    var message = res.message;
+router.get("/", loggedIn, messages, async(req, res) => {
+    var user = await res.user;
+    var message = await res.message
     if (user != undefined){
-        res.render("index", {user: user["username"], messages:message})
+        res.render("index", {user: user[0], userid: user["id"], messages:message, like:like})
     } else{
         res.render("index", {user: null})
     }
@@ -33,13 +36,13 @@ router.get("/create-message", (req, res) => {
     res.sendFile("new-message.html", {root: "./public"});
 })
 
-router.get("/profile", loggedIn,messages,(req,res) => {
-    var user = res.user;
-    var message = res.message;
+router.get("/profile", loggedIn,messages,async(req,res) => {
+    var user = await res.user;
+    var message = await res.message;
     if (user != undefined){
-        res.render("profile",{user: user, messages:message})
+        res.render("profile",{user: user[0], messages:message})
     } else{
-        res.render("index", {user:null})
+        res.redirect("/")
     }
 })
 
@@ -55,12 +58,12 @@ router.get("/verify-email", async (req,res) => {
     }
 })
 
-router.get('/users',loggedIn,messages,(req, res) => {
-    var user = res.user
+router.get('/users',loggedIn,messages,async(req, res) => {
+    var user = await res.user
     var username = req.query.user
-    var message = res.message  
+    var message = await res.message  
     if (user != undefined){
-        res.render("publicprofile", {user:user, username:username, messages:message, usernamestr:String(username)})
+        res.render("publicprofile", {user:user[0], username:username, messages:message, usernamestr:String(username)})
     } else{
         res.redirect("/")
     }

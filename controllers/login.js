@@ -9,6 +9,7 @@ const login = async (req,res) => {
         db.query('SELECT * FROM users WHERE email = ?', [email], async(Err, result) =>{
             //if(Err)throw Err;
             if(!result.length || !await bcrypt.compare(password, result[0].password))return res.json({status:'error', error:"Incorrect email or password"})
+            else if (result[0].verify == 0)return res.json({status:'error', error:"please verify email"})
             else{
                 const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET,{
                     expiresIn:process.env.JWT_EXPIRES

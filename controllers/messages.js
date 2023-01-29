@@ -1,27 +1,59 @@
 const db = require("../routes/db-config")
-const jwt = require("jsonwebtoken");
 const loggedIn = require("../controllers/loggedIn")
+const util = require("util");
+const e = require("express");
+const query = util.promisify(db.query).bind(db);
+const jwt = require("jsonwebtoken");
 
-const messages = (loggedIn,(req, res, next,) => {
+const messages = (loggedIn,async(req, res, next,) => {
     if (!req.cookies.userRegisterd)return next();
     else{
-      var username = false
-        db.query("SELECT * FROM message ORDER BY id DESC", (err, results) => {
-            if(err) throw err;
-            const message ={ 
-            }
-            results.forEach(element => {
-                const id = element['user_id']
-                db.query('SELECT * FROM users WHERE id = ?', [id], (err, result) =>{
-                    if(err)throw err;
-                    const username = result[0];
-                    message[element['title']] = [username["username"],element['message'],element['date'],element['id'],element['']];
-                })
-            });
-        res.message = message;
-        return next();
-        })
-    }  
+        const decoded = jwt.verify(req.cookies.userRegisterd, process.env.JWT_SECRET);
+        var user_id = [decoded.id]
+        const user = await query('SELECT * FROM users WHERE id = ?', [decoded.id])
+        var liked = {
+
+        }
+           db.query("SELECT * FROM message ORDER BY id DESC", async(err, results) => {
+                if(err) throw err;
+                const message ={ 
+
+                }
+                let x = 0
+                await results.forEach( async element => {
+                    const like = await query('SELECT * FROM likes WHERE item_id =?', [element['id']])
+                    let i = 0
+                    liked[x] = false
+                    await like.forEach( async (element1) =>{
+                        console.log(x)
+                        if (like[i].item_id == element['id']){
+                            if (like[i].user_id == user_id) {
+                                liked[x] = true
+                            }
+                        }
+                        i += 1           
+                    })
+                    message[element['token']] = [element['username'],element['message'],element['date'],element['title'],element['nolikes'],element['id'],element['user_id'], liked[x]];
+                    x += 1
+                });
+                res.message = message,liked;
+                return next();
+            })
+        }  
 })
-    
+
+//db.query('SELECT * FROM users WHERE id = ?', [id], (err, result) =>{
+//    if(err)throw err;
+//    const username = result[0];
+//    return username
+//})
+//db.query('SELECT * FROM likes WHERE user_id =?', [user['id']], (err, result) => {
+//    if(err)throw err;
+//    console.log(result[0])
+//    const liking = result[0];
+//    if(liking['item_id'] == element['id']){
+//        liked = false
+//    }
+//    
+//})    
 module.exports = messages;

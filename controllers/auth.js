@@ -3,7 +3,8 @@ const register = require("./register");
 const login = require("./login");
 const newmessage = require("./new-message");
 const emailverification = require("./email-verification")
-const logout = require("./logout");
+const like = require("./like")
+const unlike = require("./unlike")
 const router = express.Router();
 
 router.post("/register", register)
@@ -11,5 +12,7 @@ router.post("/login", login)
 router.post("/new-message",newmessage)
 router.post("/emailverification", emailverification)
 router.post("/logout")
+router.post("/like",like)
+router.post("/unlike", unlike)
 
 module.exports = router;

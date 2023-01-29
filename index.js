@@ -16,6 +16,9 @@ hbs.registerHelper('ifCond', function(v1, v2, options) {
     }
     return options.inverse(this);
   });
+hbs.registerHelper('print',function(v1){
+  console.log(v1)
+})
 app.set("views", "./views")
 app.use(cookie());
 app.use(express.json())
