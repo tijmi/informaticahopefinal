@@ -69,6 +69,15 @@ router.get('/users',loggedIn,messages,async(req, res) => {
     }
 });
 
+router.get('/editprofile', async(req,res) => {
+    res.sendFile("editprofile.html",{root: "./public"})
+})
+
+router.get('/download', function(req, res){
+    const file = `${__dirname}/download/definattlythedesktokversion.mp4`;
+    res.download(file); // Set disposition and send it.
+  });
+  
 
 
 module.exports = router;

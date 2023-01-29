@@ -5,7 +5,9 @@ const path = require("path");
 const cookie = require("cookie-parser");
 const PORT = process.env.PORT || 5000;
 const hbs = require("hbs");
+const fileUpload = require('express-fileupload');
 
+app.use(fileUpload());
 app.use("/js", express.static(__dirname+ "/public/js"));
 app.use("/css", express.static(__dirname+ "/public/css"));
 app.set("view engine", "hbs");

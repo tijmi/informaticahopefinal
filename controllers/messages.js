@@ -41,19 +41,4 @@ const messages = (loggedIn,async(req, res, next,) => {
             })
         }  
 })
-
-//db.query('SELECT * FROM users WHERE id = ?', [id], (err, result) =>{
-//    if(err)throw err;
-//    const username = result[0];
-//    return username
-//})
-//db.query('SELECT * FROM likes WHERE user_id =?', [user['id']], (err, result) => {
-//    if(err)throw err;
-//    console.log(result[0])
-//    const liking = result[0];
-//    if(liking['item_id'] == element['id']){
-//        liked = false
-//    }
-//    
-//})    
 module.exports = messages;
